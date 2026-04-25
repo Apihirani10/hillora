@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hillora - Travel</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Segoe UI', sans-serif;
+}
+
+body{
+  overflow-x:hidden;
+}
+
+/* HEADER */
+header{
+  position:fixed;
+  width:100%;
+  display:flex;
+  justify-content:space-between;
+  padding:15px 50px;
+  z-index:1000;
+  background:rgba(0,0,0,0.3);
+  backdrop-filter: blur(10px);
+}
+
+.logo{
+  color:white;
+  font-size:24px;
+  font-weight:bold;
+}
+
+nav a{
+  color:white;
+  margin-left:20px;
+  text-decoration:none;
+}
+
+/* HERO */
+.hero{
+  position:relative;
+  height:100vh;
+}
+
+.hero video{
+  position:absolute;
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* OVERLAY */
+.overlay{
+  position:absolute;
+  width:100%;
+  height:100%;
+  background:linear-gradient(rgba(0,0,0,0.5), rgba(90,46,72,0.8));
+}
+
+/* CONTENT */
+.content{
+  position:relative;
+  z-index:2;
+  color:white;
+  text-align:center;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.content h1{
+  font-size:60px;
+}
+
+.content p{
+  font-size:20px;
+  margin-top:10px;
+}
+
+.btn{
+  margin-top:20px;
+  padding:12px 30px;
+  background:#f1aca2;
+  border-radius:30px;
+  text-decoration:none;
+  color:black;
+  display:inline-block;
+}
+
+/* SECTION */
+.section{
+  padding:80px 20px;
+  text-align:center;
+}
+
+.cards{
+  display:flex;
+  flex-wrap:wrap;
+  justify-content:center;
+  gap:20px;
+}
+
+.card{
+  width:280px;
+  border-radius:15px;
+  overflow:hidden;
+  box-shadow:0 10px 30px rgba(0,0,0,0.1);
+}
+
+.card img{
+  width:100%;
+  height:180px;
+  object-fit:cover;
+}
+
+/* FOOTER */
+footer{
+  background:#5A2E48;
+  color:white;
+  padding:20px;
+  text-align:center;
+}
+</style>
+</head>
+
+<body>
+
+<!-- HEADER -->
+<header>
+  <div class="logo">Hillora</div>
+  <nav>
+    <a href="#">Home</a>
+    <a href="#">Destinations</a>
+    <a href="#">About</a>
+  </nav>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+
+  <video autoplay muted loop playsinline>
+    <source src="video.mp4" type="video/mp4">
+  </video>
+
+  <div class="overlay"></div>
+
+  <div class="content">
+    <h1>Hillora</h1>
+    <p>Lose Yourself in the Calm of Nature</p>
+    <a href="#" class="btn">Explore Now</a>
+  </div>
+
+</section>
+
+<!-- DESTINATIONS -->
+<section class="section">
+  <h2>Top Destinations</h2>
+
+  <div class="cards">
+    <div class="card">
+      <img src="https://source.unsplash.com/400x300/?manali">
+      <p>Manali</p>
+    </div>
+
+    <div class="card">
+      <img src="https://source.unsplash.com/400x300/?kashmir">
+      <p>Kashmir</p>
+    </div>
+
+    <div class="card">
+      <img src="https://source.unsplash.com/400x300/?goa">
+      <p>Goa</p>
+    </div>
+  </div>
+</section>
+
+<!-- ABOUT -->
+<section class="section">
+  <h2>About Hillora</h2>
+  <p>We create peaceful travel experiences inspired by nature.</p>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Hillora</p>
+</footer>
+
+</body>
+</html>
