@@ -1,190 +1,579 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>Hillora Escapes | The World's Most Immersive Eco-Retreat</title>
+    <meta name="description" content="Hillora Escapes: A 500-acre private nature sanctuary offering waterfall trekking, luxury glass domes, ethical wildlife encounters, and holistic wellness. The ultimate eco-luxury retreat.">
+    <meta name="keywords" content="Hillora, eco retreat, luxury travel, nature wellness, waterfall trekking, private mountain escape, sustainable hospitality, India luxury resorts">
+    <meta name="author" content="Hillora Escapes">
+    <meta name="robots" content="index, follow">
+    <link rel="canonical" href="https://www.hillora.com/">
+    
+    <!-- Open Graph / Social -->
+    <meta property="og:title" content="Hillora Escapes | Nature & Wellness Sanctuary">
+    <meta property="og:description" content="Discover a private 500-acre valley with glass domes, flamingo falls, and organic farm dining. Book your transformative escape.">
+    <meta property="og:image" content="https://www.hillora.com/og-preview.jpg">
+    <meta property="og:url" content="https://www.hillora.com">
+    <meta property="og:type" content="website">
+    
+    <!-- Preconnect & Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Poppins:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- GSAP & ScrollTrigger -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-<title>Hillora Escapes | The Ultimate Nature & Wellness Retreat</title>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #030303;
+            color: #f5f5f5;
+            overflow-x: hidden;
+            line-height: 1.5;
+        }
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+        /* Custom Smooth Scroll (CSS) */
+        html {
+            scroll-behavior: smooth;
+        }
 
-<style>
-:root {
-    --primary: #a8e6cf;
-    --glass: rgba(255,255,255,0.08);
-    --border: rgba(255,255,255,0.15);
-}
+        /* Background Video Container - Fixed, full bleed */
+        .video-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        #hillora-bg-video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            filter: brightness(0.45) contrast(1.05);
+            transform: scale(1.01);
+        }
+        .overlay-tint {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 20% 30%, rgba(0,0,0,0.4), rgba(0,0,0,0.7));
+            z-index: -1;
+        }
 
-*{margin:0;padding:0;box-sizing:border-box;}
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 1.5rem 6%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            backdrop-filter: blur(0px);
+        }
+        nav.scrolled {
+            background: rgba(0, 0, 0, 0.75);
+            backdrop-filter: blur(18px);
+            padding: 0.9rem 6%;
+            border-bottom: 1px solid rgba(168, 230, 207, 0.2);
+        }
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.9rem;
+            font-weight: 700;
+            letter-spacing: 2px;
+            color: #fff;
+            text-decoration: none;
+            background: linear-gradient(135deg, #fff, #a8e6cf);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            transition: 0.3s;
+        }
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+        .nav-links a {
+            color: #f0f0f0;
+            text-decoration: none;
+            font-size: 0.8rem;
+            font-weight: 500;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            transition: 0.3s;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0%;
+            height: 1.5px;
+            background: #a8e6cf;
+            transition: 0.3s;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        .nav-links a:hover {
+            color: #a8e6cf;
+        }
 
-body{
-    font-family:'Poppins',sans-serif;
-    color:#fff;
-    overflow-x:hidden;
-}
+        /* Sections */
+        section {
+            padding: 100px 7%;
+            position: relative;
+            z-index: 2;
+        }
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+        .subtitle {
+            font-size: 0.8rem;
+            letter-spacing: 5px;
+            text-transform: uppercase;
+            color: #a8e6cf;
+            font-weight: 400;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+        .glass-card {
+            background: rgba(20, 20, 30, 0.35);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 2rem;
+            padding: 2rem 2rem;
+            transition: transform 0.4s ease, box-shadow 0.3s;
+        }
+        .glass-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 25px 35px -12px rgba(0,0,0,0.4);
+            border-color: rgba(168, 230, 207, 0.4);
+        }
 
-/* ===== FULL VIDEO BACKGROUND ===== */
-.video-wrapper{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    z-index:-2;
-    overflow:hidden;
-}
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 0;
+        }
+        .hero-content h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 5.8rem;
+            font-weight: 700;
+            line-height: 1.1;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            margin-bottom: 1.2rem;
+        }
+        .hero-content p {
+            font-size: 1.2rem;
+            font-weight: 300;
+            max-width: 700px;
+            margin: 0 auto;
+            opacity: 0.9;
+        }
+        .btn {
+            display: inline-block;
+            padding: 14px 38px;
+            margin-top: 2rem;
+            border: 1.5px solid #a8e6cf;
+            border-radius: 60px;
+            background: transparent;
+            color: #fff;
+            font-weight: 600;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.4s;
+            text-decoration: none;
+        }
+        .btn:hover {
+            background: #a8e6cf;
+            color: #0a0a0a;
+            box-shadow: 0 0 20px rgba(168,230,207,0.5);
+            transform: scale(1.02);
+        }
 
-#main-video{
-    position:absolute;
-    top:50%;
-    left:50%;
-    min-width:100%;
-    min-height:100%;
-    transform:translate(-50%,-50%);
-    object-fit:cover;
-}
+        /* Grid Layouts */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        .info-item h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            color: #a8e6cf;
+        }
+        .info-item p {
+            font-weight: 300;
+            opacity: 0.85;
+            line-height: 1.7;
+        }
 
-/* DARK OVERLAY */
-.video-overlay{
-    position:fixed;
-    top:0;
-    left:0;
-    width:100%;
-    height:100%;
-    background:rgba(0,0,0,0.55);
-    z-index:-1;
-}
+        /* Itinerary */
+        .itinerary-container {
+            display: flex;
+            flex-direction: column;
+            gap: 1.6rem;
+        }
+        .day-card {
+            border-left: 3px solid #a8e6cf;
+            padding-left: 2rem;
+            position: relative;
+        }
+        .day-card::before {
+            content: '';
+            position: absolute;
+            left: -7px;
+            top: 6px;
+            width: 12px;
+            height: 12px;
+            background: #a8e6cf;
+            border-radius: 50%;
+            box-shadow: 0 0 8px #a8e6cf;
+        }
+        .day-card h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.7rem;
+            margin-bottom: 0.3rem;
+        }
 
-/* NAV */
-nav{
-    position:fixed;
-    width:100%;
-    padding:20px 8%;
-    display:flex;
-    justify-content:space-between;
-    z-index:1000;
-    backdrop-filter:blur(10px);
-}
+        /* Seasons Table */
+        .seasons-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .seasons-table th, .seasons-table td {
+            padding: 1rem 1rem;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+            text-align: left;
+        }
+        .seasons-table th {
+            color: #a8e6cf;
+            font-weight: 600;
+            letter-spacing: 1px;
+        }
 
-.logo{
-    font-family:'Playfair Display';
-    font-size:2rem;
-}
-
-/* SECTION */
-section{
-    padding:100px 8%;
-    background:rgba(0,0,0,0.25);
-    backdrop-filter:blur(6px);
-    margin:20px;
-    border-radius:20px;
-}
-
-.hero{
-    height:100vh;
-    display:flex;
-    flex-direction:column;
-    justify-content:center;
-    align-items:center;
-    text-align:center;
-    background:none;
-}
-
-.hero h1{
-    font-size:70px;
-    font-family:'Playfair Display';
-}
-
-.btn{
-    margin-top:20px;
-    padding:12px 30px;
-    border:1px solid var(--primary);
-    border-radius:30px;
-    text-decoration:none;
-    color:white;
-}
-
-.cards{
-    display:flex;
-    gap:20px;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-.card{
-    width:260px;
-    background:var(--glass);
-    border:1px solid var(--border);
-    border-radius:15px;
-    overflow:hidden;
-}
-
-.card img{
-    width:100%;
-    height:160px;
-    object-fit:cover;
-}
-
-footer{
-    text-align:center;
-    padding:40px;
-    background:rgba(0,0,0,0.6);
-}
-</style>
+        /* Two col services */
+        .two-col-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+        footer {
+            background: #030303ea;
+            backdrop-filter: blur(8px);
+            padding: 3rem 7%;
+            text-align: center;
+            border-top: 1px solid rgba(168,230,207,0.2);
+            z-index: 2;
+            position: relative;
+        }
+        @media (max-width: 850px) {
+            .section-title { font-size: 2.4rem; }
+            .hero-content h1 { font-size: 3.4rem; }
+            nav .nav-links { gap: 1rem; }
+            section { padding: 70px 5%; }
+        }
+        @media (max-width: 600px) {
+            .nav-links { display: none; } /* minimalist: but can keep basic */
+            nav { justify-content: center; }
+        }
+    </style>
 </head>
-
 <body>
 
-<!-- VIDEO -->
-<div class="video-wrapper">
-    <video autoplay muted loop playsinline id="main-video">
+<div class="video-background">
+    <!-- note: hillora.mp4 is the name given; the video will be used as full background -->
+    <video autoplay loop muted playsinline id="hillora-bg-video">
         <source src="hillora.mp4" type="video/mp4">
+        Your browser does not support HTML5 video.
     </video>
 </div>
+<div class="overlay-tint"></div>
 
-<div class="video-overlay"></div>
-
-<!-- NAV -->
-<nav>
-    <div class="logo">HILLORA</div>
+<nav id="navbar">
+    <a href="#" class="logo">HILLORA</a>
+    <ul class="nav-links">
+        <li><a href="#experience">THE SANCTUARY</a></li>
+        <li><a href="#itinerary">ITINERARY</a></li>
+        <li><a href="#seasons">SEASONS</a></li>
+        <li><a href="#booking">RESERVE</a></li>
+    </ul>
 </nav>
 
-<!-- HERO -->
-<section class="hero">
-    <h1>Hillora</h1>
-    <p>Lose Yourself in the Calm of Nature</p>
-    <a href="#" class="btn">Explore</a>
+<!-- Hero -->
+<section class="hero" id="home">
+    <div class="hero-content">
+        <span class="subtitle">Welcome to the valley of whispers</span>
+        <h1>The Earth Speaks.<br>Hillora Listens.</h1>
+        <p>500 acres of private wilderness | Glass domes, waterfalls & ethical luxury</p>
+        <a href="#experience" class="btn">Awaken Your Journey</a>
+    </div>
 </section>
 
-<!-- DESTINATIONS -->
-<section>
-    <h2>Top Destinations</h2>
-    <div class="cards">
-        <div class="card">
-            <img src="https://source.unsplash.com/400x300/?mountain">
-            <p>Manali</p>
+<!-- Experience Section -->
+<section id="experience">
+    <span class="subtitle">The Core Philosophy</span>
+    <h2 class="section-title">Beyond Ordinary Travel</h2>
+    <div class="info-grid">
+        <div class="info-item glass-card">
+            <h3>🐾 Ethical Wildlife</h3>
+            <p>Observe rare flamingos and mountain hornbills from handcrafted blinds. We adhere to a strict zero-interference code, ensuring every creature roams undisturbed across the valley.</p>
         </div>
-        <div class="card">
-            <img src="https://source.unsplash.com/400x300/?kashmir">
-            <p>Kashmir</p>
+        <div class="info-item glass-card">
+            <h3>🌿 Botanical Wonders</h3>
+            <p>Home to over 200 indigenous flora species. Join our head botanist for dawn walks around Lotus Lake, learning ancient medicinal plants preserved for centuries.</p>
         </div>
-        <div class="card">
-            <img src="https://source.unsplash.com/400x300/?goa">
-            <p>Goa</p>
+        <div class="info-item glass-card">
+            <h3>🏔️ Eco-Architecture</h3>
+            <p>Our solar-powered glass domes are suspended on low-impact platforms, harmonizing with the terrain. Every suite has spring-fed water and zero carbon footprint.</p>
         </div>
     </div>
 </section>
 
-<!-- ABOUT -->
-<section>
-    <h2>About Hillora</h2>
-    <p>Luxury nature escape designed for peace and adventure.</p>
+<!-- Itinerary -->
+<section id="itinerary">
+    <span class="subtitle">Your Path To Renewal</span>
+    <h2 class="section-title">The 3-Day Signature Escape</h2>
+    <div class="glass-card">
+        <div class="itinerary-container">
+            <div class="day-card">
+                <h4>Day 01 — Arrival & The Descent</h4>
+                <p>Private helicopter transfer into the hidden amphitheater of Hillora. Afternoon herbal tea ceremony by the Lotus Lake, followed by a glowing sunset boat ride as the cliffs turn to amber.</p>
+            </div>
+            <div class="day-card">
+                <h4>Day 02 — Into the Mist</h4>
+                <p>Guided trek to the Flamingo Falls — swim in the plunge pool. A gourmet picnic prepared by our Michelin-trained chef awaits beside the cascades. Nightfall: stargazing with an astronomer.</p>
+            </div>
+            <div class="day-card">
+                <h4>Day 03 — River Serenity & Farewell</h4>
+                <p>Sound healing meditation in the river canyon, then private canoe drifting through emerald corridors. Departure with a handcrafted valley keepsake.</p>
+            </div>
+        </div>
+    </div>
 </section>
 
-<!-- FOOTER -->
+<!-- Seasons -->
+<section id="seasons">
+    <span class="subtitle">When magic unfolds</span>
+    <h2 class="section-title">The Seasonal Calendar</h2>
+    <div class="glass-card" style="padding: 1rem 1.5rem;">
+        <table class="seasons-table">
+            <thead>
+                <tr><th>Season</th><th>Climate</th><th>Signature Experience</th></tr>
+            </thead>
+            <tbody>
+                <tr><td>🌸 Spring (Mar–May)</td><td>22°C | Mild blossoms</td><td>Peak lotus bloom, migratory bird symphony, forest rejuvenation walks.</td></tr>
+                <tr><td>☀️ Summer (Jun–Aug)</td><td>28°C | Warm lush</td><td>River swimming, waterfall mists, night kayaking with bioluminescence.</td></tr>
+                <tr><td>🍂 Autumn (Sept–Nov)</td><td>18°C | Golden crisp</td><td>Epic mountain light for photography, foraging excursions & harvest feasts.</td></tr>
+                <tr><td>❄️ Winter (Dec–Feb)</td><td>12°C | Cozy charm</td><td>Bonfire storytelling, hot stone spa rituals, clear star canvases.</td></tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+
+<!-- Services: Gastronomy + Wellness -->
+<section id="services">
+    <div class="two-col-grid">
+        <div class="glass-card">
+            <span class="subtitle">Gastronomy</span>
+            <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin: 0.5rem 0;">Farm-to-Falls Dining</h3>
+            <p>Every ingredient — from heirloom vegetables to foraged mushrooms — comes from our organic valley gardens or local regenerative farms. The five-course tasting menu is served under a celestial canopy.</p>
+        </div>
+        <div class="glass-card">
+            <span class="subtitle">Wellness</span>
+            <h3 style="font-family: 'Playfair Display'; font-size: 1.8rem; margin: 0.5rem 0;">Mountain Spring Spa</h3>
+            <p>Dramatically carved behind a gentle waterfall, our spa uses volcanic clay, warm mountain minerals, and sound therapy. The acoustic resonance of falling water creates deep meditative rest.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Booking CTA -->
+<section id="booking" style="text-align: center;">
+    <div class="glass-card" style="max-width: 700px; margin: 0 auto;">
+        <h2 class="section-title" style="margin-bottom: 0.5rem;">Embark to Hillora</h2>
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">Limited to only 10 guests per week — ensuring pristine silence and absolute privacy.</p>
+        <a href="mailto:reservations@hillora.com?subject=Hillora%20Escape%20Inquiry" class="btn">Secure Your Dates</a>
+        <p style="margin-top: 1.5rem; font-size: 0.75rem; opacity: 0.7;">✧ carbon neutral since 2024 | all-inclusive wellness escapes ✧</p>
+    </div>
+</section>
+
+<!-- Footer -->
 <footer>
-    <p>© 2026 Hillora</p>
+    <h2 class="logo" style="font-size: 2rem; margin-bottom: 1rem;">HILLORA</h2>
+    <p style="max-width: 500px; margin: 0 auto 1.5rem; opacity: 0.7;">A sanctuary where nature’s rhythm meets uncompromised luxury. The world's most awarded eco-retreat.</p>
+    <div style="display: flex; justify-content: center; gap: 2rem; margin-bottom: 2rem;">
+        <a href="#" aria-label="Instagram" style="color: #a8e6cf; text-decoration: none; font-weight: 300;">Instagram</a>
+        <a href="#" aria-label="Press" style="color: #a8e6cf; text-decoration: none;">Press Room</a>
+        <a href="#" aria-label="Sustainability" style="color: #a8e6cf; text-decoration: none;">Impact Report</a>
+        <a href="#" aria-label="Privacy" style="color: #a8e6cf; text-decoration: none;">Privacy</a>
+    </div>
+    <p>&copy; 2026 Hillora Escapes — A Private Nature Reserve. All rights reserved.</p>
 </footer>
 
+<script>
+    // Ensure video plays robustly (handles autoplay policies)
+    document.addEventListener('DOMContentLoaded', () => {
+        const video = document.getElementById('hillora-bg-video');
+        if(video) {
+            video.play().catch(e => console.log("Autoplay blocked, user interaction might be needed", e));
+        }
+    });
+
+    // GSAP + ScrollTrigger initialization
+    gsap.registerPlugin(ScrollTrigger);
+    
+    // Navbar scroll effect
+    window.addEventListener('scroll', () => {
+        const nav = document.getElementById('navbar');
+        if (window.scrollY > 60) nav.classList.add('scrolled');
+        else nav.classList.remove('scrolled');
+    });
+
+    // Fade-in reveal animations for all sections & cards (replaces old reveal)
+    gsap.utils.toArray('.hero-content, .info-item, .glass-card, .day-card, .two-col-grid > div, #booking .glass-card').forEach((el) => {
+        gsap.from(el, {
+            scrollTrigger: {
+                trigger: el,
+                start: "top 85%",
+                toggleActions: "play none none reverse",
+            },
+            opacity: 0,
+            y: 50,
+            duration: 0.9,
+            ease: "power3.out"
+        });
+    });
+    
+    // Additional specific hero title & button luxury entrance
+    gsap.from(".hero-content h1", {
+        duration: 1.2,
+        opacity: 0,
+        y: 70,
+        ease: "back.out(0.6)",
+        delay: 0.2
+    });
+    gsap.from(".hero-content .subtitle", {
+        duration: 1,
+        opacity: 0,
+        y: -30,
+        delay: 0.1
+    });
+    gsap.from(".hero-content .btn", {
+        duration: 1,
+        scale: 0.9,
+        opacity: 0,
+        delay: 0.5,
+        ease: "elastic.out(1,0.5)"
+    });
+    
+    // Stagger fade for each info-grid card
+    gsap.from(".info-grid .info-item", {
+        scrollTrigger: {
+            trigger: "#experience",
+            start: "top 75%",
+        },
+        opacity: 0,
+        x: -40,
+        stagger: 0.15,
+        duration: 0.8,
+        ease: "power2.out"
+    });
+    
+    // Day cards stagger
+    gsap.from(".day-card", {
+        scrollTrigger: {
+            trigger: "#itinerary",
+            start: "top 80%",
+        },
+        opacity: 0,
+        y: 40,
+        stagger: 0.2,
+        duration: 0.7
+    });
+    
+    // Table rows subtle animation
+    gsap.from(".seasons-table tr", {
+        scrollTrigger: {
+            trigger: "#seasons",
+            start: "top 80%",
+        },
+        opacity: 0,
+        x: -20,
+        stagger: 0.08,
+        duration: 0.6
+    });
+    
+    // parallax background feel? optional: smooth video scale on scroll? subtle
+    let lastScroll = 0;
+    window.addEventListener('scroll', () => {
+        let scrolled = window.scrollY;
+        if (scrolled < 1500) {
+            let scaleVal = 1 + (scrolled * 0.0002);
+            scaleVal = Math.min(scaleVal, 1.08);
+            document.getElementById('hillora-bg-video').style.transform = `scale(${scaleVal})`;
+        }
+    });
+    
+    // smooth anchor link behavior (improve native)
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if(href === "#" || href === "") return;
+            const targetElem = document.querySelector(href);
+            if (targetElem) {
+                e.preventDefault();
+                targetElem.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+    });
+    
+    // Preload video for better performance hint
+    if(document.getElementById('hillora-bg-video')) {
+        const vid = document.getElementById('hillora-bg-video');
+        vid.setAttribute('preload', 'auto');
+    }
+
+    // Add a tiny SEO dynamic: set year (optional)
+    const footerYear = document.querySelector('footer p:last-child');
+    if(footerYear) {
+        footerYear.innerHTML = `&copy; ${new Date().getFullYear()} Hillora Escapes — A Private Nature Reserve. All rights reserved.`;
+    }
+    // For any missing video poster fallback
+    if(document.getElementById('hillora-bg-video').readyState === 0) {
+        console.log("Buffer video");
+    }
+</script>
 </body>
 </html>
