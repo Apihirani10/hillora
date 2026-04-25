@@ -37,13 +37,13 @@
             overflow-x: hidden;
         }
 
-        /* ===== PARALLAX CONTAINER: Video scrolls with page ===== */
+        /* ===== PARALLAX WRAPPER & SCROLLING VIDEO ===== */
         .parallax-wrapper {
             position: relative;
             background: #0a0a0a;
         }
 
-        /* Video background that scrolls NORMALLY with content */
+        /* Video background that SCROLLS with the page */
         .scrolling-video-bg {
             position: absolute;
             top: 0;
@@ -53,6 +53,7 @@
             z-index: 0;
             overflow: hidden;
             pointer-events: none;
+            will-change: transform;
         }
 
         .scrolling-video-bg video {
@@ -63,14 +64,14 @@
             will-change: transform;
         }
 
-        /* Content overlay on top of scrolling video */
+        /* Content overlay on top */
         .content-overlay {
             position: relative;
             z-index: 2;
             background: transparent;
         }
 
-        /* Navbar - fixed but background changes on scroll */
+        /* Fixed Navbar */
         nav {
             position: fixed;
             top: 0;
@@ -118,7 +119,7 @@
             color: #a8e6cf;
         }
 
-        /* Sections with semi-transparent backgrounds for readability */
+        /* Sections with semi-transparent backgrounds */
         section {
             padding: 100px 7%;
             position: relative;
@@ -290,10 +291,11 @@
 <body>
 
 <div class="parallax-wrapper">
-    <!-- Video that SCROLLS with the page (not fixed) -->
+    <!-- BACKGROUND VIDEO THAT SCROLLS WITH PAGE (Parallax effect) -->
     <div class="scrolling-video-bg" id="parallaxVideo">
         <video autoplay loop muted playsinline id="hilloraVideo">
             <source src="hillora.mp4" type="video/mp4">
+            Your browser does not support the video tag.
         </video>
     </div>
 
@@ -398,7 +400,7 @@
             <div class="glass-card" style="max-width: 700px; margin: 0 auto;">
                 <h2 class="section-title" style="margin-bottom: 0.5rem;">Awaken Your Escape</h2>
                 <p>Limited to only 10 guests per week — absolute privacy and silence guaranteed.</p>
-                <a href="mailto:reservations@hillora.com" class="btn">Check Availability →</a>
+                <a href="#" class="btn">Check Availability →</a>
                 <p style="margin-top: 1.5rem; font-size: 0.75rem;">✦ Carbon neutral since 2024 | All-inclusive wellness journeys ✦</p>
             </div>
         </section>
@@ -420,7 +422,7 @@
     // Ensure video plays
     const video = document.getElementById('hilloraVideo');
     if(video) {
-        video.play().catch(e => console.log("autoplay blocked"));
+        video.play().catch(e => console.log("autoplay blocked - user interaction may be needed"));
     }
 
     // Navbar scroll effect
@@ -431,17 +433,14 @@
     });
 
     // ========== PARALLAX EFFECT: Video moves with scroll at slower speed ==========
-    // This creates the "Pinterest-style" where background scrolls but with a subtle parallax depth
+    // This creates the "Pinterest-style" where background scrolls with depth
     const videoBg = document.querySelector('.scrolling-video-bg');
-    let scrollY = 0;
     
     function updateParallax() {
-        scrollY = window.scrollY;
-        // Move the background container at 50% speed of scroll -> creates depth
-        // Also add slight scale to enhance cinematic feel
+        const scrollY = window.scrollY;
         if (videoBg) {
-            const translateY = scrollY * 0.4; // Slower movement = depth effect
-            videoBg.style.transform = `translateY(${translateY}px)`;
+            // Move at 40% speed of scroll -> creates the floating depth effect
+            videoBg.style.transform = `translateY(${scrollY * 0.4}px)`;
         }
         requestAnimationFrame(updateParallax);
     }
@@ -451,7 +450,6 @@
     // GSAP ScrollTrigger for fade-in animations
     gsap.registerPlugin(ScrollTrigger);
     
-    // Animate all sections on reveal
     gsap.utils.toArray('.hero, .info-item, .glass-card, .day-card, .two-col > div, #booking .glass-card').forEach(el => {
         gsap.from(el, {
             scrollTrigger: {
@@ -466,7 +464,7 @@
         });
     });
     
-    // Hero specific
+    // Hero specific entrance
     gsap.from(".hero h1", {
         duration: 1.2,
         opacity: 0,
@@ -488,7 +486,7 @@
         ease: "elastic.out(1,0.4)"
     });
     
-    // Stagger for cards
+    // Stagger for info cards
     gsap.from(".info-grid .info-item", {
         scrollTrigger: {
             trigger: "#experience",
@@ -501,7 +499,7 @@
         ease: "power2.out"
     });
     
-    // Table rows
+    // Table rows animation
     gsap.from(".seasons-table tr", {
         scrollTrigger: {
             trigger: "#seasons",
@@ -526,13 +524,11 @@
         });
     });
     
-    // Optional: Add a subtle scale effect to video on heavy scroll (cinematic)
-    let lastScroll = 0;
+    // Optional: subtle scale effect on video for cinematic depth
     window.addEventListener('scroll', () => {
-        let scrolled = window.scrollY;
-        let scaleVal = 1 + (scrolled * 0.00015);
-        scaleVal = Math.min(scaleVal, 1.08);
         if(video) {
+            let scaleVal = 1 + (window.scrollY * 0.00015);
+            scaleVal = Math.min(scaleVal, 1.08);
             video.style.transform = `scale(${scaleVal})`;
         }
     });
